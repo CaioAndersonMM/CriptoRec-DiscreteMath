@@ -1,4 +1,4 @@
-# Matemática Discreta - Solucionador de Recorrências Homogêneas
+# Matemática Discreta - Criptografia e Solucionador de Recorrências Homogêneas
 
 ## Visão Geral
 
