@@ -3,11 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> </title>
+    <title>Equações de Recorrência Homogênias</title>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="javascript.js"></script>
+    <style>
+         body {
+            background-color:rgb(22, 16, 16);
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .content{
+            display: flex; justify-content: center;
+        }
+
+        #resultado{
+            background-color: rgb(255, 251, 245); 
+            color: black; 
+            font-weight: bold; 
+            max-width: 400px;
+        }
+    </style>
 </head>
-<body style="background-color: rgb(22, 16, 16); text-align: center; color: #ffffff;">
-    <h1>    </h1>
+<body>
+    <h1>  Insira os Valores  </h1>
 
     <label for="campo1">Coeficiente A:</label>
     <input type="number" id="campo1">
@@ -23,134 +42,12 @@
 
     <button id="capturarButton" onclick="capturarDados()">Calcular</button>
     <br><br><br>
-    <div style="display: flex; justify-content: center;">
-        <div id="resultado" style="background-color: rgb(255, 251, 245); color: black; font-weight: bold; max-width: 400px;">
+    <div class="content">
+        <div id="resultado">
+
         </div>
     
     </div>
-    <script>
-        function capturarDados() {
-            const a = parseFloat(document.getElementById("campo1").value);
-            const b = parseFloat(document.getElementById("campo2").value);
-            const c = parseFloat(document.getElementById("campo3").value);
-            const delta = b * b - 4 * a * c;
-            let resultado = "";
-
-            alert(delta);
-            if (delta > 0) {
-                let operator1 = `-`;
-                let operator2 = `+`;
-                let operator3 = `-`;
-                let operator4 = `-`;
-                if (b < 0) {
-                    operator1 = ``;
-                    operator3 = ``;
-                }
-                resultado = `1° caso - Discriminante maior que zero:<br>
-                <math xmlns="http://www.w3.org/1998/Math/MathML">
-                    <mrow>
-                        <msub>
-                            <mi>X</mi>
-                            <mn>n</mn>
-                        </msub>
-                        <mo>
-                            =
-                        </mo>
-
-                        <msub>
-                                <mi>C</mi>
-                                <mn>1</mn>
-                        </msub>
-                        <mo>
-                            *
-                        </mo>
-                        <msup>
-                            <mrow>
-                                <mo>(</mo>
-                                <mfrac>
-                                    <mrow>
-                                        <mrow>
-                                                <mo>|</mo>
-                                                <mo>${operator1}${Math.abs(b)}</mo>
-                                                <mo>|</mo>
-                                        </mrow>
-                                        <mo>
-                                            ${operator2}
-                                        </mo>
-                                        <mrow>
-                                            <msqrt>
-                                                <mi>${delta}</mi>
-                                            </msqrt>
-                                        </mrow>
-                                    </mrow>
-                                    <mrow>
-                                        <mn>2</mn>
-                                        <mi>a</mi>
-                                    </mrow>
-                                </mfrac>
-                                <mo>)</mo>
-                            </mrow>
-                            <mi>n</mi>
-                        </msup>
-
-                        <mo>+</mo>
-                        
-                        <msub>
-                            <mi>C</mi>
-                            <mn>2</mn>
-                        </msub>
-                        <mo>*</mo>
-                        <msup>
-                            <mrow>
-                                <mo>(</mo>
-                                <mfrac>
-                                    <mrow>
-                                        <mrow>
-                                            <mrow>
-                                                <mo>|</mo>
-                                                <mo>${operator3}${Math.abs(b)}</mo>
-                                                <mo>|</mo>
-                                            </mrow>
-                                        </mrow>
-                                        <mo>${operator4}</mo>
-                                        <mrow>
-                                        <msqrt>
-                                            <mi>${delta}</mi>
-                                        </msqrt>
-                                        </mrow>
-                                    </mrow>
-                                    <mrow>
-                                        <mn>2</mn>
-                                        <mi>a</mi>
-                                    </mrow>
-                                </mfrac>
-                                <mo>)</mo>
-                            </mrow>
-                            <mi>n</mi>
-                        </msup>
-                    </mrow>
-                </math>`;
-            } else if (delta < 0) {
-                resultado = `3° caso - Discriminante menor que zero:<br>
-                <math xmlns="http://www.w3.org/1998/Math/MathML">
-                </math>`;
-            } else { //delta = 0
-                let operator1 = `-`;
-                if (b < 0) {
-                    operator1 = ``;
-                }
-                resultado = `2° caso - Discriminante igual a zero:<br>
-                <math xmlns="http://www.w3.org/1998/Math/MathML">
-                    <mrow>
-                        
-                    </mrow>
-                </math>`;
-            }
-
-    document.getElementById("resultado").innerHTML = resultado;
-
-    }
-    </script>
 
 </body>
 </html>
