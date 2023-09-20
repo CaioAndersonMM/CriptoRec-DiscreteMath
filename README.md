@@ -19,7 +19,7 @@ Este repositório contém uma aplicação desenvolvida por uma equipe dedicada d
 
 ## Equipe de Desenvolvimento
 
-- [Caio Anderson Martins](#) - Membro da Equipe
+- [CAIO ANDERSON MARTINS MOURA](#) - Membro da Equipe
 - [LUCAS GABRIEL OLIVEIRA DA SILVA](#) - Membro da Equipe
 - [JOAO PEDRO PEREIRA FRUTUOSO](#) - Membro da Equipe
 - [BEN ARIEL FRANCA MARTINS](#) - Membro da Equipe
