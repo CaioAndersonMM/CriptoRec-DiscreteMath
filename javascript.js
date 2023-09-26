@@ -15,105 +15,21 @@ function capturarDados() {
             operator1 = ``;
             operator3 = ``;
         }
-        resultado = `1° caso - Discriminante maior que zero:<br>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <mrow>
-                <msub>
-                    <mi>X</mi>
-                    <mn>n</mn>
-                </msub>
-                <mo>
-                    =
-                </mo>
-
-                <msub>
-                        <mi>C</mi>
-                        <mn>1</mn>
-                </msub>
-                <mo>
-                    *
-                </mo>
-                <msup>
-                    <mrow>
-                        <mo>(</mo>
-                        <mfrac>
-                            <mrow>
-                                <mrow>
-                                        <mo>|</mo>
-                                        <mo>${operator1}${Math.abs(b)}</mo>
-                                        <mo>|</mo>
-                                </mrow>
-                                <mo>
-                                    ${operator2}
-                                </mo>
-                                <mrow>
-                                    <msqrt>
-                                        <mi>${delta}</mi>
-                                    </msqrt>
-                                </mrow>
-                            </mrow>
-                            <mrow>
-                                <mn>2</mn>
-                                <mi>a</mi>
-                            </mrow>
-                        </mfrac>
-                        <mo>)</mo>
-                    </mrow>
-                    <mi>n</mi>
-                </msup>
-
-                <mo>+</mo>
-                
-                <msub>
-                    <mi>C</mi>
-                    <mn>2</mn>
-                </msub>
-                <mo>*</mo>
-                <msup>
-                    <mrow>
-                        <mo>(</mo>
-                        <mfrac>
-                            <mrow>
-                                <mrow>
-                                    <mrow>
-                                        <mo>|</mo>
-                                        <mo>${operator3}${Math.abs(b)}</mo>
-                                        <mo>|</mo>
-                                    </mrow>
-                                </mrow>
-                                <mo>${operator4}</mo>
-                                <mrow>
-                                <msqrt>
-                                    <mi>${delta}</mi>
-                                </msqrt>
-                                </mrow>
-                            </mrow>
-                            <mrow>
-                                <mn>2</mn>
-                                <mi>a</mi>
-                            </mrow>
-                        </mfrac>
-                        <mo>)</mo>
-                    </mrow>
-                    <mi>n</mi>
-                </msup>
-            </mrow>
-        </math>`;
+        resultado = `1° caso - Discriminante Maior que Zero:<br>
+        <img src="https://latex.codecogs.com/svg.image?X_n%20%3D%20C_1%20%5Cleft(%5Cfrac%7B%7C${b}%7C%20%2B%20%5Csqrt%7B${delta}%7D%7D%7B2*${a}%7D%5Cright)%5En%20%2B%20C_2%20%5Cleft(%5Cfrac%7B%7C${b}%7C%20-%20%5Csqrt%7B${delta}%7D%7D%7B2*${a}%7D%5Cright)%5En" alt="Expressão LaTeX">
+        `;
     } else if (delta < 0) {
         resultado = `3° caso - Discriminante menor que zero:<br>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-        </math>`;
+        Utilizar Latex
+        `;
     } else { //delta = 0
         let operator1 = `-`;
         if (b < 0) {
             operator1 = ``;
         }
         resultado = `2° caso - Discriminante igual a zero:<br>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <mrow>
-                
-            </mrow>
-        </math>`;
+        Utilizar Latex
+        `;
     }
 
 document.getElementById("resultado").innerHTML = resultado;
