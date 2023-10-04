@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CIFRA DE CÉSAR</title>
+
+  <link rel="stylesheet" href="./css/styles.css">
+
+  <script src="./js/main.js" defer></script>
+</head>
+<body>
+
+  <main>
+    <h1><strong>Criptografia/Descriptografia</strong> por Cifra de César</h1>
+    <p>Insira a mensagem que deseja <strong>criptografar</strong></p>
+
+    <div class="key-func">
+      <p>Defina a <strong>chave</strong> de criptografia: f(x) = </p>
+      <div class="func">
+        <input type="text" id="z"> 
+        <span>x² + </span>
+        <input type="text" id="A"> 
+        <span>x + </span>
+        <input type="text" id="B">
+      </div>
+    </div>
+
+    <input type="text"  placeholder="APENAS MAIÚSCULAS" id="codeEncrypt">
+
+    <div class="buttons">
+      <button type="button" class="btnEncrypt" onclick="encrypt()">
+        Criptografar
+      </button>
+      <button type="button" onclick="decrypt()">
+        Descriptografar
+      </button>
+    </div>
+
+    <div class="result"></div>
+
+    <code class="code-1">
+      <span>0</span>
+      <span>1</span>
+      <span>1</span>
+      <span>0</span>
+      <span>1</span>
+      <span>0</span>
+      <span>0</span>
+      <span>1</span>
+      <span>0</span>
+      <span>0</span>
+      <span>1</span>
+      <span>0</span>
+    </code>
+
+    <code class="code-2">
+      <span>0</span>
+      <span>1</span>
+      <span>1</span>
+      <span>0</span>
+      <span>1</span>
+      <span>0</span>
+      <span>0</span>
+      <span>1</span>
+      <span>0</span>
+      <span>0</span>
+      <span>1</span>
+      <span>0</span>
+    </code>
+
+    <code class="code-3">
+      <span>1</span>
+      <span>0</span>
+      <span>1</span>
+      <span>0</span>
+      <span>1</span>
+      <span>1</span>
+      <span>0</span>
+      <span>1</span>
+      <span>0</span>
+      <span>0</span>
+      <span>1</span>
+      <span>0</span>
+    </code>
+
+    <code class="code-4">
+      <span>u</span>
+      <span>h</span>
+      <span>b</span>
+      <span>a</span>
+      <span>v</span>
+      <span>b</span>
+      <span>g</span>
+      <span>b</span>
+      <span>t</span>
+      <span>h</span>
+      <span>r</span>
+      <span>p</span>
+    </code>
+
+    <code class="code-5">
+      <span>h</span>
+      <span>u</span>
+      <span>y</span>
+      <span>d</span>
+      <span>a</span>
+      <span>á</span>
+      <span>v</span>
+      <span>g</span>
+      <span>h</span>
+      <span>j</span>
+      <span>l</span>
+      <span>p</span>
+    </code>
+
+    <code class="code-6">
+      <span>t</span>
+      <span>e</span>
+      <span>w</span>
+      <span>q</span>
+      <span>v</span>
+      <span>n</span>
+      <span>ç</span>
+      <span>x</span>
+      <span>z</span>
+      <span>b</span>
+      <span>y</span>
+      <span>n</span>
+    </code>
+  </main>
+</body>
+</html>
