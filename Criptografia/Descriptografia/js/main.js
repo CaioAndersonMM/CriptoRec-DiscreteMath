@@ -1,26 +1,25 @@
 const inputHTML = document.getElementById('codeEncrypt')
-const inputAHTML = document.getElementById('A')
-const inputBHTML = document.getElementById('B')
-const inputCHTML = document.getElementById('z')
+const inputAHTML = document.getElementById('a')
+const inputBHTML = document.getElementById('b')
+const inputCHTML = document.getElementById('c')
 const btnEncrypt = document.querySelector('.btnEncrypt')
 const resultHTML = document.querySelector('.result')
 
-// tabela de caracteres para criptografia
-// divididos por positivos e negativos
-const TABLECHARACTER = { 
-  positive: {
-    'A': '1', 'B': '2', 'C': '3', 'D': '4', 'E': '5', 'F': '6', 'G': '7', 'H': '8', 'I': '9', 'J': '10',
-    'K': '11', 'L': '12', 'M': '13', 'N': '14', 'O': '15', 'P': '16', 'Q': '17', 'R': '18', 'S': '19', 'T': '20',
-    'U': '21', 'V': '22', 'W': '23', 'X': '24', 'Y': '25', 'Z': '26', '.': '27', ',': '28', ' ': '29'
-  },
-  negative: {
-    'A': '-28', 'B': '-27', 'C': '-26', 'D': '-25', 'E': '-24', 'F': '-23', 'G': '-22', 'H': '-21', 'I': '-20', 'J': '-19',
-    'K': '-18', 'L': '-17', 'M': '-16', 'N': '-15', 'O': '-14', 'P': '-13', 'Q': '-12', 'R': '-11', 'S': '-10', 'T': '-9',
-    'U': '-8', 'V': '-7', 'W': '-6', 'X': '-5', 'Y': '-4', 'Z': '-3', '.': '-2', ',': '-1', ' ': '0'
-  }
+var message, kValues, values, delta;
+var aValue, bValue, cValue, funcType;
+
+let ASCIIList = [];
+// coleta caracteres imprímiveis da tabela ASCII
+for (let i = 32; i <= 255; i++) {
+  ASCIIList.push(String.fromCharCode(i));
 }
 
-let numberTorDecrypt = []
+// cria json capaz de converter cada caractere para seu número correspondendete
+let ASCII = {};
+for (let i = 0; i < ASCIIList.length; i++) {
+  let letter = ASCIIList[i];
+  ASCII[letter] = i;
+}
 
 const encrypt = () => {
   if (inputAHTML.value === "") {
@@ -32,136 +31,99 @@ const encrypt = () => {
   if (inputCHTML.value === "") {
     inputCHTML.value = "0";
   }
+
+  if (parseFloat(inputAHTML.value) > 0) {
+    funcType = "Quad Positiva";
+  }
+  else if (parseFloat(inputAHTML.value) < 0) {
+    funcType = "Quad Negativa";
+  }
+  else {
+    funcType = "Afim";
+  }
+
+  [aValue, bValue, cValue] = [parseFloat(inputAHTML.value), parseFloat(inputBHTML.value), parseFloat(inputCHTML.value)]; // obtem os valores inteiros de a, b e c
+
+  delta = (bValue*bValue)-(4*aValue*cValue);
   
-  if (inputAHTML.value === "0" && inputCHTML.value === "0") {
+  if (inputAHTML.value === "0" && inputBHTML.value === "0") {
     alert("Os valores de 'a' e 'b' não podem ser simultaneamente 0.")
-    return;
   }
   else if (inputHTML.value === "") {
     alert("A frase a criptografar não pode ser vazia.");
-    return;
+  }
+  else {
+    message = inputHTML.value.split('') // transforma palavra em array
+
+    const result = encryptMessage(message);
+
+    message = result[0];
+    kValues = result[1];
+    values = result[2];
+
+    resultHTML.innerHTML = `<p>Sua mensagem criptografada: <strong>${message}</strong></p>`
+  }
+  return;
+} 
+
+const encryptMessage = (messageToEncryptInChar) => {
+  const kValues = new Array(messageToEncryptInChar.length);
+  const values = new Array(messageToEncryptInChar.length);
+  let messageResult = "";
+
+  // percorrendo a mensagem à criptografar
+  for (let i = 0; i < messageToEncryptInChar.length; i++) {
+    let xValue = ASCII[messageToEncryptInChar[i]]; // obtem o número associado ao caractere
+
+    let yValue = (aValue*xValue*xValue)+(bValue*xValue)+(cValue); // encontra o valor de y da função do segundo grau
+
+    kValues[i] = Math.floor(yValue/(Object.keys(ASCII).length)); // encontra o valor de k para cada elemento
+    values[i] = yValue-(kValues[i]*(Object.keys(ASCII).length)); // obtem novos valores, que representarão as letras criptografadas
+    messageResult += ASCIIList[values[i]]; // converte valor em letras criptografadas
+
   }
 
-  // valor vindo do input principal
-  // transformando em array com cada letra
-  // Ex.: ['P', 'O', 'O']
-  const messageToEncryptInChar = inputHTML.value.split('')
-  
-  const [wordEncrypt, arrayEncrypt] = encryptMessage(messageToEncryptInChar)
-  numberTorDecrypt = arrayEncrypt
- 
-  //  adiciona na tela o resultado
-  resultHTML.innerHTML = `<p>Sua mensagem criptografada: <strong>${wordEncrypt}</strong></p>`
+  return [messageResult, kValues, values];
 }
 
 const decrypt = () => {
-  if (!inputAHTML.value || !inputBHTML.value || !inputHTML.value) return
+  const wordDecrypt = decryptMessage();
 
-  const wordDecrypt = decryptMessage(numberTorDecrypt)
+  resultHTML.innerHTML = `<p>Sua mensagem descriptografada: <strong>${wordDecrypt}</strong></p>`
+}
 
-  resultHTML.innerHTML = `<p>Sua mensagem criptografada: <strong>${wordDecrypt}</strong></p>`
-} 
+const decryptMessage = () => {
+  let messageResult = "";
 
 
-const encryptMessage = (messageToEncryptInChar) => {
-  let numbersValidsToEncrypt = []
-// pecorre os array com os caracetres
-  messageToEncryptInChar.forEach((item) => {
 
-    // cálculo para achar o número da criptografia
-    const number = (Number(inputAHTML.value) * Number(TABLECHARACTER.positive[item])) + Number(inputBHTML.value)
-    alert(item+" "+number);
+  for (let i = 0; i < message.length; i++) {
+    values[i] += kValues[i]*(Object.keys(ASCII).length);
 
-    // verifica se está entre o range dos caracteres
-    if (number >= 1 && number <= 29) {
-      // salva, o char, o numero que está com char 
-      numbersValidsToEncrypt.push({ char: item, number: number, oldNumber: number })
-    } else {
-      // cálculo um número que esteja entre o range de 1 e 29 (tamanho da tabela)
-      const newNumber = findK(number) 
+    values[i] = inverseFunction(values[i]);
 
-      // adiciona o número novo e guarda o antigo tbm
-      // o char ainda não foi atualizado
-      numbersValidsToEncrypt.push({ char: item, number: Number(newNumber), oldNumber: number })
-    }
-  })
-
-  let str = ''
-
-  let count = 0
-  // pecorre a quantidade de elementos que seram encriptografado
-  for (count; count < numbersValidsToEncrypt.length; count++) {
-    // se maior que zero usamos a tabela para positivos
-    if (numbersValidsToEncrypt[count].number > 0) {
-      // como a tabela tem números de 1 a 29 
-      // pecorremos pelo index
-      // esse metodo retorn um array com os valores da tabelas (uns números no caso)
-      Object.values(TABLECHARACTER.positive).forEach((item, index) => {
-        // verificamos se o número salvo for igual ao da tabela
-        if (Number(item) === numbersValidsToEncrypt[count].number) {
-          // adicionamos na string a letra na posição onde o valor foi igual ao número do cálculo da congruenca
-          str += Object.keys(TABLECHARACTER.positive)[index]
-        }
-      })
-    } else {
-      // mesma lógica para tabela dos negativo
-      Object.values(TABLECHARACTER.negative).forEach((item, index) => {
-        if (Number(item) === numbersValidsToEncrypt[count].number) {
-          str += Object.keys(TABLECHARACTER.negative)[index]
-        }
-      })
-    }
+    messageResult += ASCIIList[values[i]];
   }
-
-  return [str, numbersValidsToEncrypt]
+  return messageResult;
 }
 
-const decryptMessage = (numberTorDecrypt) => {
-  let inverseArray = []
-  let str = ''
+const inverseFunction = (xValue) => {
+  delta = (bValue*bValue)-(4*aValue*(cValue-xValue));
+  let raizDelta = Math.sqrt(delta);
 
-  numberTorDecrypt.forEach((item) => {
-    inverseArray.push(inverseFunction(inputAHTML.value, inputBHTML.value, item.oldNumber))     
-  })
-
-  inverseArray.forEach((item) => {
-    if (Number(item) > 0) {
-      Object.values(TABLECHARACTER.positive).forEach((tableNumber, index) => {
-        if (Number(tableNumber) === Number(item))  {
-          str += Object.keys(TABLECHARACTER.positive)[index];
-        }
-      })
-    } else {
-      Object.values(TABLECHARACTER.negative).forEach((tableNumber, index) => {
-        if (Number(tableNumber) === Number(item))  {
-          str += Object.keys(TABLECHARACTER.negative)[index];
-        }
-      })
-    }
-  })
-
-  return str
-}
-
-// até achar um número enre -28 e 29
-const findK = (number) => {
-  let result
-
-  do {
-    // sorteia um número aleatório enrre -28 e 29
-    const k = Math.floor(Math.random() * 29) - 28
-    // cálculo da conguência
-    result = Number(number) + Number(k * 29)
-  } while (result < -28 || result > 29) 
-  
-  return Number(result)
-}
-
-// seria a função da inversa
-const inverseFunction = (a, b, x) => {
-  if (x > 0) {
-    return (Number(x) - Number(b)) / Number(a)
-  } else {
-    return (Number(x) + Number(b)) / Number(a)
+  if (funcType === "Afim") {
+    return (xValue-cValue)/bValue;
+  }
+  else if (((-bValue+raizDelta)/(2*aValue)) === 0) {
+    return (-bValue+raizDelta)/(2*aValue);
+  }
+  else if (((-bValue-raizDelta)/(2*aValue)) === 0) {
+    return (-bValue-raizDelta)/(2*aValue);
+  }
+  else if (funcType === "Quad Positiva") {
+    return (-bValue+raizDelta)/(2*aValue);
+  }
+  else if (funcType === "Quad Negativa") {
+    return (-bValue-raizDelta)/(2*aValue);
   }
 }
