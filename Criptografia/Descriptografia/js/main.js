@@ -10,7 +10,22 @@ var aValue, bValue, cValue, funcType;
 
 let ASCIIList = [];
 // coleta caracteres imprímiveis da tabela ASCII
-for (let i = 32; i <= 255; i++) {
+for (let i = 32; i <= 126; i++) {
+  ASCIIList.push(String.fromCharCode(i));
+}
+for (let i = 130; i <= 140; i++) {
+  ASCIIList.push(String.fromCharCode(i));
+}
+for (let i = 145; i <= 148; i++) {
+  ASCIIList.push(String.fromCharCode(i));
+}
+for (let i = 150; i <= 156; i++) {
+  ASCIIList.push(String.fromCharCode(i));
+}
+for (let i = 159; i <= 159; i++) {
+  ASCIIList.push(String.fromCharCode(i));
+}
+for (let i = 161; i <= 255; i++) {
   ASCIIList.push(String.fromCharCode(i));
 }
 
@@ -82,20 +97,24 @@ const encryptMessage = (messageToEncryptInChar) => {
     messageResult += ASCIIList[values[i]]; // converte valor em letras criptografadas
 
   }
-
   return [messageResult, kValues, values];
 }
 
 const decrypt = () => {
   const wordDecrypt = decryptMessage();
 
-  resultHTML.innerHTML = `<p>Sua mensagem descriptografada: <strong>${wordDecrypt}</strong></p>`
+  if (message != "") {
+    resultHTML.innerHTML = `<p>Sua mensagem descriptografada: <strong>${wordDecrypt}</strong></p>`
+    message = "";
+  }
+  else {
+    resultHTML.innerHTML = `<p>Sua mensagem não pode ser descriptografada novamente.</p>`
+  }
+  return;
 }
 
 const decryptMessage = () => {
   let messageResult = "";
-
-
 
   for (let i = 0; i < message.length; i++) {
     values[i] += kValues[i]*(Object.keys(ASCII).length);
@@ -104,6 +123,7 @@ const decryptMessage = () => {
 
     messageResult += ASCIIList[values[i]];
   }
+
   return messageResult;
 }
 
