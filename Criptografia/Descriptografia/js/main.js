@@ -7,6 +7,7 @@ const resultHTML = document.querySelector('.result')
 
 var message, kValues, values, delta;
 var aValue, bValue, cValue, funcType;
+var wordDecrypt;
 
 let ASCIIList = [];
 // coleta caracteres imprímiveis da tabela ASCII
@@ -101,14 +102,15 @@ const encryptMessage = (messageToEncryptInChar) => {
 }
 
 const decrypt = () => {
-  const wordDecrypt = decryptMessage();
-
   if (message != "") {
-    resultHTML.innerHTML = `<p>Sua mensagem descriptografada: <strong>${wordDecrypt}</strong></p>`
+    wordDecrypt = decryptMessage();
+    resultHTML.innerHTML = `<p>Sua mensagem descriptografada: <strong>${wordDecrypt}</strong></p>`;
     message = "";
+    return;
   }
-  else {
-    resultHTML.innerHTML = `<p>Sua mensagem não pode ser descriptografada novamente.</p>`
+  else if (wordDecrypt != "") {
+    resultHTML.innerHTML = `<p>Sua mensagem descriptografada: <strong>${wordDecrypt}</strong></p>`;
+    return;
   }
   return;
 }

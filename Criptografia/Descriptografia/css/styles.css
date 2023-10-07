@@ -20,6 +20,8 @@ main {
 
 main h1 {
   font-size: 42px;
+  margin-top: 16px;
+  margin-bottom: 90px;
 }
 
 main p {
@@ -38,7 +40,7 @@ main input {
   border-radius: 8px;
   padding: 10px 15px;
   border: none;
-  margin-top: 36px;
+  margin-top: 8px;
   background-color: #1C1B1B;
   font-size: 16px;
   color: #EEE;
@@ -66,8 +68,8 @@ main .key-func .func {
 }
 
 main .key-func input {
-  width: 30px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   margin-top: 0px;
   padding: 5px;
   margin-left: 4px;
@@ -94,7 +96,7 @@ main button:hover {
 }
 
 main .buttons {
-  margin-top: 26px;
+  margin-top: 16px;
   max-width: 600px;
 }
 
