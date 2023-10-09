@@ -4,6 +4,7 @@ const inputBHTML = document.getElementById('b')
 const inputCHTML = document.getElementById('c')
 const btnEncrypt = document.querySelector('.btnEncrypt')
 const resultHTML = document.querySelector('.result')
+const alertHTML = document.getElementById('alertSpan')
 
 var message, kValues, values, delta;
 var aValue, bValue, cValue, funcType;
@@ -63,10 +64,10 @@ const encrypt = () => {
   delta = (bValue*bValue)-(4*aValue*cValue);
   
   if (inputAHTML.value === "0" && inputBHTML.value === "0") {
-    alert("Os valores de 'a' e 'b' não podem ser simultaneamente 0.")
+    alertHTML.innerHTML = `<p>Os valores de 'a' e 'b' não podem ser simultaneamente 0</p>`;
   }
   else if (inputHTML.value === "") {
-    alert("A frase a criptografar não pode ser vazia.");
+    alertHTML.innerHTML = `<p>A frase a criptografar não pode ser vazia</p>`;
   }
   else {
     message = inputHTML.value.split('') // transforma palavra em array

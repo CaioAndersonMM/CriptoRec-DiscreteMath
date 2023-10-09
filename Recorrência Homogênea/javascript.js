@@ -21,9 +21,6 @@ function capturarDados() {
         <img src="https://latex.codecogs.com/svg.image?X_n%20%3D%20${P1}%5En%20%5Ccdot%20%28k_1%20%5Ccdot%20%5Ccos%28n%20%5Ccdot%20${angulo}%5E%7B%5Ccirc%7D%29%20%2B%20k_2%20%5Ccdot%20%5Csin%28n%20%5Ccdot%20${angulo}%5E%7B%5Ccirc%7D%29%29" alt="Expressão LaTeX">
         `;
     } else { //delta = 0
-        if (b < 0) {
-            operator1 = ``;
-        }
         resultado = `2° caso - Discriminante igual a zero:<br><br>
         <img src="https://latex.codecogs.com/svg.image?X_n%20%3D%20C_1%20%5Ccdot%20${Math.abs(b)/(2*a)}%5En%20%2B%20C_2%20%5Ccdot%20n%20%5Ccdot%20${Math.abs(b)/(2*a)}%5En" alt="Expressão LaTeX">
         `;
