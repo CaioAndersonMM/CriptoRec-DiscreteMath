@@ -1,12 +1,23 @@
+
 # Matemática Discreta - Criptografia e Solucionador de Recorrências Homogêneas
 
 ## Visão Geral
 
 Este repositório contém uma aplicação desenvolvida por uma equipe dedicada de estudantes para resolver equações de recorrência homogêneas de segunda ordem com coeficientes constantes. A aplicação foi projetada para auxiliar os usuários a entender e resolver essas equações de forma eficiente, com base nos três casos comuns geralmente encontrados em cursos de matemática discreta.
 
+
+# Tela Criptografar/Descriptografar
+![captura2](https://github.com/CaioAndersonMM/CriptoRec-DiscreteMath/assets/42953923/8095c5d6-1c4c-428d-a375-883c586197b3)
+![captura1](https://github.com/CaioAndersonMM/CriptoRec-DiscreteMath/assets/42953923/88f65c1e-1453-4dd2-9984-d8e4e1c0ac07)
+
+# Tela Recorrência Homogênea
+![captura3](https://github.com/CaioAndersonMM/CriptoRec-DiscreteMath/assets/42953923/f2454e90-987d-45f4-ac3c-68eed079ac59)
+![captura4](https://github.com/CaioAndersonMM/CriptoRec-DiscreteMath/assets/42953923/f06adcc0-f08c-4c0c-a0c7-7e02d8295cb0)
+
+
 ## Recursos
 
-- Interface amigável para inserir os coeficientes da equação de recorrência.
+- Interface amigável para inserir os coeficientes da equação de recorrência e de criptografiar.
 - Cálculo e exibição da solução da equação de recorrência com base nos três casos predominantes.
 - Um recurso educacional valioso para estudantes que estão estudando matemática discreta.
 
